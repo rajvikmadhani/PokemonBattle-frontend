@@ -1,10 +1,18 @@
 import { usePokemon } from "../context/pokemonContext";
+import { useUser } from "../context/userContext";
+import { useNavigate } from "react-router-dom";
 
 const PokemonCard = ({ pokemon, isInRoster = false, onRemove }) => {
   const { addPokemonToRoster, removePokemonFromRoster, limitReached } =
     usePokemon();
+  const { user } = useUser();
+  const navigate = useNavigate();
 
   const handleAddPokemon = () => {
+    if (!user) {
+      navigate("/signin");
+      return;
+    }
     addPokemonToRoster(pokemon);
   };
 
@@ -92,7 +100,7 @@ const PokemonCard = ({ pokemon, isInRoster = false, onRemove }) => {
       <div className="flex justify-center mt-4">
         {isInRoster ? (
           <button
-            onClick={onRemove || handleRemovePokemon}
+            onClick={onRemove ? () => onRemove() : handleRemovePokemon}
             className="w-32 py-2 rounded-lg bg-red-500 hover:bg-red-600 text-white transition-all"
           >
             Remove from Roster
