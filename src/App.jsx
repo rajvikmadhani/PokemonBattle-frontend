@@ -7,6 +7,7 @@ import { PokemonProvider } from "./context/pokemonContext.jsx";
 import Leaderboard from "./pages/Leaderboard.jsx";
 import { UserProvider } from "./context/userContext";
 import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp.jsx";
 
 function App() {
     return (
@@ -23,6 +24,7 @@ function App() {
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/signin" element={<SignIn />} />
+                        <Route path="/signup" element={<SignUp />} />
                         <Route path="details/:id" element={<Details />} />
                         {/* to be replaced once sign in & up is implemented*/}
                         <Route path="roster" element={<Rooster />} />

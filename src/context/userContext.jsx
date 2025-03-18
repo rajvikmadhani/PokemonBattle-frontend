@@ -5,31 +5,36 @@ const UserContext = createContext();
 export const useUser = () => useContext(UserContext);
 
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+    const [user, setUser] = useState(null);
 
-  // Simulated Login (must be replaced by API-Call)
-  const login = (userData) => {
-    setUser(userData);
-    localStorage.setItem("user", JSON.stringify(userData));
-  };
+    // Simulated Login (must be replaced by API-Call)
+    const login = (userData) => {
+        setUser(userData);
+        localStorage.setItem("user", JSON.stringify(userData));
+    };
 
-  // Logout function
-  const logout = () => {
-    setUser(null);
-    localStorage.removeItem("user");
-  };
+    const signup = (userData) => {
+        setUser(userData);
+        localStorage.setItem("user", JSON.stringify(userData));
+    };
 
-  // Check if a user is saved
-  useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
-  }, []);
+    // Logout function
+    const logout = () => {
+        setUser(null);
+        localStorage.removeItem("user");
+    };
 
-  return (
-    <UserContext.Provider value={{ user, login, logout }}>
-      {children}
-    </UserContext.Provider>
-  );
+    // Check if a user is saved
+    useEffect(() => {
+        const storedUser = localStorage.getItem("user");
+        if (storedUser) {
+            setUser(JSON.parse(storedUser));
+        }
+    }, []);
+
+    return (
+        <UserContext.Provider value={{ user, login, signup, logout }}>
+            {children}
+        </UserContext.Provider>
+    );
 };
