@@ -1,3 +1,4 @@
+import Filter from "daisyui/components/filter";
 import LeaderboardList from "../components/LeaderboardList";
 
 const Leaderboard = () => {
