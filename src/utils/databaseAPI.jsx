@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:3000/users";
+const API_URL = "http://localhost:5000/users";
 
 // Fetch single user by ID (GET /users/:id)
 export const fetchUser = async (userId) => {
@@ -31,7 +31,7 @@ export const fetchUserRoster = async (userId) => {
     try {
         const response = await axios.get(`${API_URL}/${userId}`);
         console.log("Fetched user roster:", response.data.roster);
-        return response.data.roster; // Gibt direkt die Pokémon-IDs zurück
+        return response.data.roster; // Return Pokémon-IDs
     } catch (error) {
         console.error("Failed to fetch user roster:", error.message);
         throw new Error("Failed to fetch roster. Please try again later.");
