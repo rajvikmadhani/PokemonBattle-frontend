@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
+import { signinUser, signupUser } from "../utils/databaseAPI.js";
 
 const UserContext = createContext();
 
@@ -7,15 +8,28 @@ export const useUser = () => useContext(UserContext);
 export const UserProvider = ({ children }) => {
     const [user, setUser] = useState(null);
 
-    // Simulated Login (must be replaced by API-Call)
-    const login = (userData) => {
-        setUser(userData);
-        localStorage.setItem("user", JSON.stringify(userData));
+    const login = async (credentials) => {
+        try {
+            // credentials: { email, password }
+            const response = await signinUser(credentials);
+            setUser(response);
+            localStorage.setItem("user", JSON.stringify(response));
+        } catch (error) {
+            console.error("Failed to sign in:", error);
+            // Optionally handle or display an error message
+        }
     };
 
-    const signup = (userData) => {
-        setUser(userData);
-        localStorage.setItem("user", JSON.stringify(userData));
+    const signup = async (newUserData) => {
+        try {
+            // newUserData: { name, email, password, ...}
+            const response = await signupUser(newUserData);
+            setUser(response);
+            localStorage.setItem("user", JSON.stringify(response));
+        } catch (error) {
+            console.error("Failed to sign up:", error);
+            // Optionally handle or display an error message
+        }
     };
 
     // Logout function

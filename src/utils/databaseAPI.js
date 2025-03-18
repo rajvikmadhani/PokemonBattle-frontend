@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/users";
+const API_URL = "/users";
 
 // Fetch single user by ID (GET /users/:id)
 export const fetchUser = async (userId) => {
@@ -91,5 +91,29 @@ export const fetchLeaderboard = async () => {
     } catch (error) {
         console.error("Failed to fetch leaderboard:", error.message);
         throw new Error("Failed to fetch leaderboard. Please try again later.");
+    }
+};
+
+//for signup :need to update the URL base from the backend
+export const signupUser = async (newUserData) => {
+    try {
+        const response = await axios.post(API_URL, newUserData);
+        console.log("User signed up:", response.data);
+        return response.data;
+    } catch (error) {
+        console.error("Sign-up failed:", error.message);
+        throw new Error("Failed to sign up. Please try again later.");
+    }
+};
+
+//for signin :need to update for the URL should match the backend
+export const signinUser = async (userCredentials) => {
+    try {
+        const response = await axios.post(`${API_URL}/login`, userCredentials);
+        console.log("User signed in:", response.data);
+        return response.data;
+    } catch (error) {
+        console.error("Sign-in failed:", error.message);
+        throw new Error("Failed to sign in. Please check your credentials.");
     }
 };

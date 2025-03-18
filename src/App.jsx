@@ -16,7 +16,7 @@ function App() {
                 <Router>
                     <nav>
                         <Link to="/">Home</Link>
-                        <Link to="roster">My Roster</Link>
+                        <Link to="rooster">My Roster</Link>
                         <Link to="battle">Battle</Link>
                         <Link to="leaderboard">Leaderboard</Link>
                     </nav>
@@ -27,7 +27,7 @@ function App() {
                         <Route path="/signup" element={<SignUp />} />
                         <Route path="details/:id" element={<Details />} />
                         {/* to be replaced once sign in & up is implemented*/}
-                        <Route path="roster" element={<Rooster />} />
+                        <Route path="rooster" element={<Rooster />} />
                         {/* to be replaced once sign in & up is implemented*/}
                         <Route path="battle" element={<Battle />} />
                         <Route path="leaderboard" element={<Leaderboard />} />
