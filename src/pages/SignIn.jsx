@@ -21,7 +21,7 @@ const SignIn = () => {
   return (
     <div
       style={{ fontFamily: "'VT323', monospace" }}
-      className="flex flex-col items-center justify-center min-h-screen p-4 text-xl"
+      className="flex flex-col items-center justify-center p-4 text-xl"
     >
       <h2 className="text-4xl font-extrabold text-green-400 mb-6 drop-shadow-sm">Sign In</h2>
 
