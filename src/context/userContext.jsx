@@ -6,16 +6,18 @@ const UserContext = createContext();
 export const useUser = () => useContext(UserContext);
 
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(localStorage.getItem('user') || null);
 
   const login = async credentials => {
     try {
       // credentials: { email, password }
       const response = await signinUser(credentials);
       console.log('response', response);
-      setUser(response);
 
-      //localStorage.setItem('user', JSON.stringify(response));
+      // Assuming response has { token, user }
+      setUser(response.user);
+      localStorage.setItem('token', response.token);
+      localStorage.setItem('user', JSON.stringify(response.user));
     } catch (error) {
       console.error('Failed to sign in:', error);
       // Optionally handle or display an error message
@@ -37,6 +39,7 @@ export const UserProvider = ({ children }) => {
   const logout = () => {
     setUser(null);
     localStorage.removeItem('user');
+    localStorage.removeItem('token');
   };
 
   // Check if a user is saved
@@ -48,6 +51,8 @@ export const UserProvider = ({ children }) => {
   }, []);
 
   return (
-    <UserContext.Provider value={{ user, login, signup, logout }}>{children}</UserContext.Provider>
+    <UserContext.Provider value={{ user, setUser, login, signup, logout }}>
+      {children}
+    </UserContext.Provider>
   );
 };
