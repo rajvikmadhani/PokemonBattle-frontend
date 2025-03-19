@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const API_USERS_URL = '/users';
 const API_LEADERBOARD_URL = '/leaderboard';
-const API_AUTH_URL = '/login';
+const API_AUTH_URL = '/auth';
 
 // Fetch single user by ID (GET /users/:id)
 export const fetchUser = async userId => {
@@ -111,7 +111,7 @@ export const signupUser = async newUserData => {
 
 export const signinUser = async userCredentials => {
   try {
-    const response = await axios.post(`${API_AUTH_URL}`, userCredentials);
+    const response = await axios.post(`${API_AUTH_URL}/login`, userCredentials);
     console.log('User signed in:', response.data);
     return response.data;
   } catch (error) {

@@ -12,9 +12,10 @@ export const UserProvider = ({ children }) => {
     try {
       // credentials: { email, password }
       const response = await signinUser(credentials);
-      console.log(response);
-      //   setUser(response);
-      //   localStorage.setItem('user', JSON.stringify(response));
+      console.log('response', response);
+      setUser(response);
+
+      //localStorage.setItem('user', JSON.stringify(response));
     } catch (error) {
       console.error('Failed to sign in:', error);
       // Optionally handle or display an error message
