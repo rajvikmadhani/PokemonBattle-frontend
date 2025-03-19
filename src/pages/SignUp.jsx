@@ -1,7 +1,7 @@
-// SignUp.jsx
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '../context/userContext';
+import { toast } from 'react-toastify';
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -22,6 +22,7 @@ const SignUp = () => {
   const handleSubmit = async e => {
     e.preventDefault();
     await signup(formData);
+    toast.success('Signup successfully!', { autoClose: 1000 });
     navigate('/signin');
   };
 

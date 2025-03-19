@@ -2,11 +2,12 @@ import axios from 'axios';
 
 const API_USERS_URL = '/users';
 const API_LEADERBOARD_URL = '/leaderboard';
+const API_AUTH_URL = '/login';
 
 // Fetch single user by ID (GET /users/:id)
 export const fetchUser = async userId => {
   try {
-    const response = await axios.get(`${API_LEADERBOARD_URL}/${userId}`);
+    const response = await axios.get(`${API_USERS_URL}/${userId}`);
     console.log('Fetched user data:', response.data);
     return response.data;
   } catch (error) {
@@ -110,7 +111,7 @@ export const signupUser = async newUserData => {
 
 export const signinUser = async userCredentials => {
   try {
-    const response = await axios.post(`${API_USERS_URL}/login`, userCredentials);
+    const response = await axios.post(`${API_AUTH_URL}`, userCredentials);
     console.log('User signed in:', response.data);
     return response.data;
   } catch (error) {

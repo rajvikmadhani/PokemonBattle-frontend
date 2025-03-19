@@ -10,7 +10,10 @@ export default defineConfig({
         changeOrigin: true,
       },
       '/leaderboard': {
-        // new proxy entry
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+      },
+      '/auth': {
         target: 'http://localhost:3000',
         changeOrigin: true,
       },

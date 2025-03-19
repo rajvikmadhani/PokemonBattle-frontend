@@ -9,24 +9,26 @@ import { UserProvider } from './context/userContext';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp.jsx';
 import MainLayout from './layouts/MainLayout.jsx';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   return (
-    <UserProvider>
-      <PokemonProvider>
-        <Router>
-          <Routes>
-            <Route path="/" element={<MainLayout />}>
-              <Route index element={<Home />} />
-              <Route path="/signin" element={<SignIn />} />
-              <Route path="/signup" element={<SignUp />} />
-              <Route path="details/:id" element={<Details />} />
-              {/* to be replaced once sign in & up is implemented*/}
-              <Route path="rooster" element={<Rooster />} />
-              {/* to be replaced once sign in & up is implemented*/}
-              <Route path="battle" element={<Battle />} />
-              <Route path="leaderboard" element={<Leaderboard />} />
-              {/* Protected routes
+    <>
+      <UserProvider>
+        <PokemonProvider>
+          <Router>
+            <Routes>
+              <Route path="/" element={<MainLayout />}>
+                <Route index element={<Home />} />
+                <Route path="/signin" element={<SignIn />} />
+                <Route path="/signup" element={<SignUp />} />
+                <Route path="details/:id" element={<Details />} />
+                {/* to be replaced once sign in & up is implemented*/}
+                <Route path="roster" element={<Rooster />} />
+                {/* to be replaced once sign in & up is implemented*/}
+                <Route path="battle" element={<Battle />} />
+                <Route path="leaderboard" element={<Leaderboard />} />
+                {/* Protected routes
             <Route
               path="/rooster"
               element={
@@ -43,11 +45,13 @@ function App() {
                 </ProtectedRoute>
               }
             /> */}
-            </Route>
-          </Routes>
-        </Router>
-      </PokemonProvider>
-    </UserProvider>
+              </Route>
+            </Routes>
+          </Router>
+        </PokemonProvider>
+      </UserProvider>
+      <ToastContainer />
+    </>
   );
 }
 

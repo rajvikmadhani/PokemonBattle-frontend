@@ -2,27 +2,20 @@ import { useState } from 'react';
 import { useUser } from '../context/userContext';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router';
+import { toast } from 'react-toastify';
 
 const SignIn = () => {
   const { login } = useUser();
   const navigate = useNavigate();
 
-  // Local state for email/password
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  // Handle "Sign in as Guest"
-  const handleGuestLogin = async () => {
-    // const fakeUser = { id: "123", name: "Ash Ketchum" };
-    await login({ email: 'guest@example.com', password: 'guest' });
-    navigate('/rooster');
-  };
-
-  // Handle the form submission for email/password login
   const handleSubmit = async e => {
     e.preventDefault();
     await login({ email, password });
-    navigate('/rooster');
+    toast.success('Signin successfully!', { autoClose: 1000 });
+    navigate('/roster');
   };
 
   return (
@@ -71,14 +64,6 @@ const SignIn = () => {
             Sign In
           </button>
         </form>
-
-        <div className="divider text-green-500">OR</div>
-        <button
-          onClick={handleGuestLogin}
-          className="btn w-full bg-black text-green-300 font-bold hover:bg-green-700 transition-colors border border-green-500 text-xl"
-        >
-          Sign in as Guest
-        </button>
 
         <div className="mt-4 text-green-300 text-center">
           Don&apos;t have an account?{' '}
