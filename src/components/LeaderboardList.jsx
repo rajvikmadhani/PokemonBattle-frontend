@@ -2,11 +2,13 @@ import styles from '../styles/Leaderboard.module.css';
 import React, { useEffect, useState } from 'react';
 import { fetchLeaderboard } from '../utils/databaseAPI.js';
 import { getPokemonById } from '../utils/pokemonAPI.js';
+import { useAuth } from '../hooks/useAuth';
 
 const LeaderboardList = () => {
   const [leaderboard, setLeaderboard] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const { user } = useAuth();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,9 +42,7 @@ const LeaderboardList = () => {
 
   return (
     <div className="p-4">
-      {/* Make the container scroll horizontally if content is wide */}
       <div className="overflow-x-auto w-full">
-        {/* Give the table a minimum width so columns aren’t too narrow */}
         <table className={`min-w-[900px] w-full text-left ${styles.gameboyTable}`}>
           <thead>
             <tr className="bg-gray-100">
@@ -54,29 +54,37 @@ const LeaderboardList = () => {
           </thead>
           <tbody>
             {leaderboard && leaderboard.length > 0 ? (
-              leaderboard.map((entry, index) => (
-                <tr key={entry.id} className="hover:bg-slate-400">
-                  <td className="px-4 py-3 border-b">{index + 1}</td>
-                  <td className="px-4 py-3 border-b">{entry.username}</td>
-                  <td className="px-4 py-3 border-b">
-                    {entry.pokemonDetails && entry.pokemonDetails.length > 0 ? (
-                      <div className="flex flex-wrap gap-2">
-                        {entry.pokemonDetails.map(pokemon => (
-                          <img
-                            key={pokemon.id}
-                            src={pokemon.sprites.front_default}
-                            alt={pokemon.name}
-                            className="w-20 h-20 object-contain"
-                          />
-                        ))}
-                      </div>
-                    ) : (
-                      'No deck available'
-                    )}
-                  </td>
-                  <td className="px-4 py-3 border-b">{entry.score}</td>
-                </tr>
-              ))
+              leaderboard.map((entry, index) => {
+                const isCurrentUser = user && entry.username === user.username;
+                return (
+                  <tr
+                    key={entry.id}
+                    className={`${
+                      isCurrentUser ? 'bg-yellow-500 font-bold' : 'hover:bg-slate-400'
+                    }`}
+                  >
+                    <td className="px-4 py-3 border-b">{index + 1}</td>
+                    <td className="px-4 py-3 border-b">{entry.username}</td>
+                    <td className="px-4 py-3 border-b">
+                      {entry.pokemonDetails && entry.pokemonDetails.length > 0 ? (
+                        <div className="flex flex-wrap gap-2">
+                          {entry.pokemonDetails.map(pokemon => (
+                            <img
+                              key={pokemon.id}
+                              src={pokemon.sprites.front_default}
+                              alt={pokemon.name}
+                              className="w-20 h-20 object-contain"
+                            />
+                          ))}
+                        </div>
+                      ) : (
+                        'No deck available'
+                      )}
+                    </td>
+                    <td className="px-4 py-3 border-b">{entry.score}</td>
+                  </tr>
+                );
+              })
             ) : (
               <tr>
                 <td colSpan="4" className="text-center px-4 py-3">
