@@ -10,7 +10,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 w-full flex items-center justify-between p-4 bg-black">
+    <nav className="flex items-center justify-between p-4 bg-black">
       <div className="flex items-center space-x-6">
         <Link to="/" className="text-green-400 text-2xl font-bold">
           Home
