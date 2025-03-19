@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '../context/userContext';
 import { toast } from 'react-toastify';
+import { Link } from 'react-router';
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -89,6 +90,12 @@ const SignUp = () => {
             Create Account
           </button>
         </form>
+        <div className="mt-4 text-green-300 text-center">
+          Already has an account?{' '}
+          <Link to="/signin" className="underline">
+            Sign in here
+          </Link>
+        </div>
       </div>
     </div>
   );
