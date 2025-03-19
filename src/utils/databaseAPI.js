@@ -1,8 +1,9 @@
 import axios from 'axios';
 
-const API_USERS_URL = '/users';
-const API_LEADERBOARD_URL = '/leaderboard';
-const API_AUTH_URL = '/auth';
+export const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+const API_USERS_URL = `${BACKEND_URL}/users`;
+const API_LEADERBOARD_URL = `${BACKEND_URL}/leaderboard`;
+const API_AUTH_URL = `${BACKEND_URL}/auth`;
 
 // Fetch single user by ID (GET /users/:id)
 export const fetchUser = async userId => {
