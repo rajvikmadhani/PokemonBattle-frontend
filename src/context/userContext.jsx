@@ -1,54 +1,53 @@
-import { createContext, useContext, useState, useEffect } from "react";
-import { signinUser, signupUser } from "../utils/databaseAPI.js";
+import { createContext, useContext, useState, useEffect } from 'react';
+import { signinUser, signupUser } from '../utils/databaseAPI.js';
 
 const UserContext = createContext();
 
 export const useUser = () => useContext(UserContext);
 
 export const UserProvider = ({ children }) => {
-    const [user, setUser] = useState(null);
+  const [user, setUser] = useState(null);
 
-    const login = async (credentials) => {
-        try {
-            // credentials: { email, password }
-            const response = await signinUser(credentials);
-            setUser(response);
-            localStorage.setItem("user", JSON.stringify(response));
-        } catch (error) {
-            console.error("Failed to sign in:", error);
-            // Optionally handle or display an error message
-        }
-    };
+  const login = async credentials => {
+    try {
+      // credentials: { email, password }
+      const response = await signinUser(credentials);
+      console.log('response', response);
+      setUser(response);
 
-    const signup = async (newUserData) => {
-        try {
-            // newUserData: { name, email, password, ...}
-            const response = await signupUser(newUserData);
-            setUser(response);
-            localStorage.setItem("user", JSON.stringify(response));
-        } catch (error) {
-            console.error("Failed to sign up:", error);
-            // Optionally handle or display an error message
-        }
-    };
+      //localStorage.setItem('user', JSON.stringify(response));
+    } catch (error) {
+      console.error('Failed to sign in:', error);
+      // Optionally handle or display an error message
+    }
+  };
 
-    // Logout function
-    const logout = () => {
-        setUser(null);
-        localStorage.removeItem("user");
-    };
+  const signup = async newUserData => {
+    try {
+      const data = await signupUser(newUserData);
+      console.log(data);
+      return data;
+    } catch (error) {
+      console.error('Signup error:', error);
+      throw error;
+    }
+  };
 
-    // Check if a user is saved
-    useEffect(() => {
-        const storedUser = localStorage.getItem("user");
-        if (storedUser) {
-            setUser(JSON.parse(storedUser));
-        }
-    }, []);
+  // Logout function
+  const logout = () => {
+    setUser(null);
+    localStorage.removeItem('user');
+  };
 
-    return (
-        <UserContext.Provider value={{ user, login, signup, logout }}>
-            {children}
-        </UserContext.Provider>
-    );
+  // Check if a user is saved
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
+
+  return (
+    <UserContext.Provider value={{ user, login, signup, logout }}>{children}</UserContext.Provider>
+  );
 };
