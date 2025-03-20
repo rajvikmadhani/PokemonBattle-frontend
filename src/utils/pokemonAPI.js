@@ -9,7 +9,7 @@ const API_URL = 'https://pokeapi.co/api/v2/pokemon';
 // Fetch the first 151 Pokémon (Gen 1 - Kanto Region)
 export const getAllPokemon = async () => {
   try {
-    const response = await axios.get(`${API_URL}?limit=151`);
+    const response = await axios.get(`${API_URL}?limit=50`);
     const pokemonList = response.data.results;
 
     // Fetch details for each Pokémon
