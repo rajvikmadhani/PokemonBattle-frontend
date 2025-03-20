@@ -49,7 +49,7 @@ const Card = ({ pokemon, isMusicOn }) => {
     <motion.div
       initial={{ opacity: 0, scale: 0.8, y: 50 }}
       animate={{ opacity: 1, scale: 1, y: 0 }}
-      whileHover={{ scale: 1.05, rotateX: 10, rotateY: 10 }}
+      whileHover={{ scale: 1.05, rotate: 10 }}
       transition={{ duration: 0.5 }}
       className="relative w-72 h-96 flex flex-col items-center text-white bg-cover shadow-lg"
       style={{
@@ -75,8 +75,8 @@ const Card = ({ pokemon, isMusicOn }) => {
           src={pokemon.sprites?.other?.['official-artwork']?.front_default || '/placeholder.png'}
           alt={pokemon.name || 'Unknown Pokémon'}
           className="w-32 h-32 object-contain transition-transform"
-          initial={{ scale: 1, filter: 'drop-shadow(0px 0px 0px transparent)' }}
-          whileHover={{ scale: 1.1, filter: 'drop-shadow(0px 0px 15px #FF00FF)' }}
+          initial={{ scale: 1 }}
+          whileHover={{ scale: 1.1 }}
           onMouseEnter={() => isMusicOn && cry.play()} // 🔊 Play cry only if music is ON
           transition={{ duration: 0.4 }}
         />
@@ -110,8 +110,8 @@ const Card = ({ pokemon, isMusicOn }) => {
       {/* Flavor Text Animation */}
       <div className="absolute bottom-[55px] leading-none overflow-hidden flex items-center justify-center max-w-xs">
         <motion.p
-          initial={{ x: '100%' }}
-          animate={{ x: '-100%' }}
+          initial={{ x: 100 }}
+          animate={{ x: -100 }}
           transition={{ repeat: Infinity, duration: 6, ease: 'linear' }}
           className="text-[#d9ff36] italic text-lg text-center whitespace-nowrap drop-shadow-md"
         >
