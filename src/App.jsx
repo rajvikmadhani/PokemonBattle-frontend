@@ -60,7 +60,7 @@ function App() {
 
                 {/* Protected Routes */}
                 <Route
-                  path="rooster"
+                  path="roster"
                   element={
                     <ProtectedRoute>
                       <Rooster />
