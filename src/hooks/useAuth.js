@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useUser } from '../context/userContext';
-import { BACKEND_URL } from '../utils/databaseAPI';
+import { getAuth } from '../utils/authHelper';
 
 export const useAuth = () => {
   const { user, setUser } = useUser();
@@ -13,19 +13,7 @@ export const useAuth = () => {
       return;
     }
 
-    fetch(`${BACKEND_URL}/auth/me`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then(res => {
-        if (!res.ok) {
-          throw new Error('Failed to authenticate');
-        }
-        return res.json();
-      })
+    getAuth(token)
       .then(data => {
         if (data.user) {
           setUser(data.user);

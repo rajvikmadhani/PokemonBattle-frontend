@@ -32,7 +32,7 @@ const SignUp = () => {
       style={{ fontFamily: "'VT323', monospace" }}
       className="flex flex-col items-center justify-center p-4 text-xl"
     >
-      <h2 className="text-4xl font-extrabold text-green-400 mb-6 drop-shadow-sm">Sign Up</h2>
+      <h2 className="text-4xl font-extrabold text-green-400 mb-8 drop-shadow-sm">Sign Up</h2>
       <div className="border border-green-400 rounded-md p-6 w-full max-w-sm shadow-[0_0_10px_2px_rgba(34,197,94,0.5)] bg-transparent">
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>

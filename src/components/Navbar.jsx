@@ -3,6 +3,8 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
 import { FaTimes, FaVolumeUp, FaVolumeMute } from 'react-icons/fa';
 import { useUser } from '../context/userContext';
+import { FaHome, FaUsers, FaBattleNet, FaTrophy, FaSignInAlt, FaSignOutAlt } from 'react-icons/fa';
+import { FaRegUser } from 'react-icons/fa6';
 
 const Navbar = ({ isMusicOn, toggleMusic, handleSearch, searchTerm }) => {
   const [isOpen, setIsOpen] = useState(false);
