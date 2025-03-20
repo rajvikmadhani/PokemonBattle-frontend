@@ -22,7 +22,6 @@ const Leaderboard = () => {
             <h1 className={`${styles.gameboyHeader} text-2xl mb-6 text-center`}>
               Game Leaderboard
             </h1>
-            <Filter />
             <LeaderboardList />
           </div>
         </div>
