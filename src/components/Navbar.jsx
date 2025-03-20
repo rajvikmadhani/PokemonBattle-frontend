@@ -68,61 +68,58 @@ const Navbar = ({ isMusicOn, toggleMusic, handleSearch, searchTerm }) => {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.3, ease: 'easeInOut' }}
             >
-              {/* Menu Items with Links */}
-              <ul className="w-full flex flex-col gap-4">
-                {['Home', 'Roster', 'Battle', 'Leaderboard'].map((page, index) => (
-                  <li key={index}>
+              <>
+                <ul className="w-full flex flex-col gap-4">
+                  {['Home', 'Roster', 'Battle', 'Leaderboard'].map((page, index) => (
+                    <li key={index}>
+                      <Link
+                        to={page === 'Home' ? '/' : `/${page.toLowerCase()}`}
+                        className="w-full text-lg font-bold text-white bg-orange-600 py-3 rounded-md shadow-md border-4 border-orange-300 uppercase flex items-center justify-center gap-2 hover:bg-orange-700 transition"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        {page}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+                <button
+                  onClick={toggleMusic}
+                  className={`mt-4 w-full text-lg font-bold py-1 rounded-lg shadow-md uppercase flex items-center justify-center gap-2 transition ${
+                    isMusicOn
+                      ? 'bg-blue-600 border-blue-300 text-white hover:bg-blue-700' // ON state (Blue)
+                      : 'bg-green-600 border-red-300 text-white hover:bg-green-700' // OFF state (Red)
+                  }`}
+                >
+                  {isMusicOn ? <FaVolumeUp size={20} /> : <FaVolumeMute size={20} />}
+                  {isMusicOn ? 'Music On' : 'Music Off'}
+                </button>
+
+                <div className="mt-4">
+                  {user ? (
+                    <button
+                      onClick={handleLogout}
+                      className="text-white text-lg font-bold uppercase py-3 rounded-md shadow-md bg-red-600 border-4 border-red-300 hover:bg-red-700 transition w-full"
+                    >
+                      Logout
+                    </button>
+                  ) : (
                     <Link
-                      to={page === 'Home' ? '/' : `/${page.toLowerCase()}`}
-                      className="w-full text-lg font-bold text-white bg-orange-600 py-3 rounded-md shadow-md border-4 border-orange-300 uppercase flex items-center justify-center gap-2 hover:bg-orange-700 transition"
+                      to="/signin"
+                      className="text-white text-lg font-bold uppercase py-3 rounded-md shadow-md bg-blue-600 border-4 border-blue-300 hover:bg-blue-700 transition w-full flex items-center justify-center"
                       onClick={() => setIsOpen(false)}
                     >
-                      {page}
+                      Sign In
                     </Link>
-                  </li>
-                ))}
-              </ul>
+                  )}
+                </div>
 
-              {/* Music Toggle Button */}
-              <button
-                onClick={toggleMusic}
-                className={`mt-4 w-full text-lg font-bold py-1 rounded-lg shadow-md uppercase flex items-center justify-center gap-2 transition ${
-                  isMusicOn
-                    ? 'bg-blue-600 border-blue-300 text-white hover:bg-blue-700' // ON state (Blue)
-                    : 'bg-green-600 border-red-300 text-white hover:bg-green-700' // OFF state (Red)
-                }`}
-              >
-                {isMusicOn ? <FaVolumeUp size={20} /> : <FaVolumeMute size={20} />}
-                {isMusicOn ? 'Music On' : 'Music Off'}
-              </button>
-
-              {/* Auth Buttons */}
-              <div className="mt-4">
-                {user ? (
-                  <button
-                    onClick={handleLogout}
-                    className="text-white text-lg font-bold uppercase py-3 rounded-md shadow-md bg-red-600 border-4 border-red-300 hover:bg-red-700 transition w-full"
-                  >
-                    Logout
-                  </button>
-                ) : (
-                  <Link
-                    to="/signin"
-                    className="text-white text-lg font-bold uppercase py-3 rounded-md shadow-md bg-blue-600 border-4 border-blue-300 hover:bg-blue-700 transition w-full flex items-center justify-center"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    Sign In
-                  </Link>
-                )}
-              </div>
-
-              {/* Close Button */}
-              <button
-                onClick={() => setIsOpen(false)}
-                className="mt-6 bg-red-600 w-10 h-10 flex items-center justify-center rounded-full border-4 border-red-200 shadow-md hover:bg-red-700 transition"
-              >
-                <FaTimes size={20} />
-              </button>
+                <button
+                  onClick={() => setIsOpen(false)}
+                  className="mt-6 bg-red-600 w-10 h-10 flex items-center justify-center rounded-full border-4 border-red-200 shadow-md hover:bg-red-700 transition"
+                >
+                  <FaTimes size={20} />
+                </button>
+              </>
             </motion.div>
           )}
         </AnimatePresence>
