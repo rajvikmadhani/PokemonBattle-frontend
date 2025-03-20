@@ -70,17 +70,30 @@ const Navbar = ({ isMusicOn, toggleMusic, handleSearch, searchTerm }) => {
             >
               <>
                 <ul className="w-full flex flex-col gap-4">
-                  {['Home', 'Roster', 'Battle', 'Leaderboard'].map((page, index) => (
-                    <li key={index}>
-                      <Link
-                        to={page === 'Home' ? '/' : `/${page.toLowerCase()}`}
-                        className="w-full text-lg font-bold text-white bg-orange-600 py-3 rounded-md shadow-md border-4 border-orange-300 uppercase flex items-center justify-center gap-2 hover:bg-orange-700 transition"
-                        onClick={() => setIsOpen(false)}
-                      >
-                        {page}
-                      </Link>
-                    </li>
-                  ))}
+                  <li>
+                    <Link
+                      to="/"
+                      className="w-full text-lg font-bold text-white bg-orange-600 py-3 rounded-md shadow-md border-4 border-orange-300 uppercase flex items-center justify-center gap-2 hover:bg-orange-700 transition"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      Home
+                    </Link>
+                  </li>
+                  {user && (
+                    <>
+                      {['Roster', 'Battle', 'Leaderboard'].map((page, index) => (
+                        <li key={index}>
+                          <Link
+                            to={`/${page.toLowerCase()}`}
+                            className="w-full text-lg font-bold text-white bg-orange-600 py-3 rounded-md shadow-md border-4 border-orange-300 uppercase flex items-center justify-center gap-2 hover:bg-orange-700 transition"
+                            onClick={() => setIsOpen(false)}
+                          >
+                            {page}
+                          </Link>
+                        </li>
+                      ))}
+                    </>
+                  )}
                 </ul>
                 <button
                   onClick={toggleMusic}
