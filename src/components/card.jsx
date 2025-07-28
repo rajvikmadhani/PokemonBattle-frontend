@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { Howl } from 'howler'; // Import Howler
 import cardFrame from '../assets/card-frame.jpeg';
 
-const Card = ({ pokemon, isMusicOn }) => {
+const card = ({ pokemon, isMusicOn }) => {
   if (!pokemon) return <p className="text-white text-center">Loading...</p>;
   const navigate = useNavigate();
 
@@ -138,4 +138,4 @@ const Card = ({ pokemon, isMusicOn }) => {
   );
 };
 
-export default Card;
+export default card;
