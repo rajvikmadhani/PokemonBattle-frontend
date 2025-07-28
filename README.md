@@ -1,12 +1,58 @@
-# React + Vite
+# Pokémon Battle Frontend ⚔️
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A dynamic and interactive Pokémon battle frontend built with **React** and **Vite**. This app provides a smooth and engaging user interface to simulate Pokémon battles in real-time.
 
-Currently, two official plugins are available:
+🌐 **Live Demo:** [https://pokemon-battle-frontend-two.vercel.app/](https://pokemon-battle-frontend-two.vercel.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+📤 **Deployment:** This project is deployed using [GitHub Pages](https://pages.github.com/) via [`gh-pages`](https://www.npmjs.com/package/gh-pages).  
+To deploy:
 
-## Expanding the ESLint configuration
+```bash
+npm run build     # Builds the app to the dist/ folder
+npm run deploy    # Publishes dist/ to the gh-pages branch
+```
+---
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## ✨ Features
+
+- Responsive UI with React and modern CSS
+- Real-time battle interface
+- Pokémon selection and battle mechanics (integrates with backend)
+- Smooth animations and user feedback
+- Built with Vite for fast development and optimized build
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend:** React, Vite
+- **Styling:** CSS Modules / Tailwind CSS (adapt based on your setup)
+- **State Management:** React Hooks / Context API (adapt if using Redux or others)
+
+---
+
+## 🚀 Getting Started (Local Development)
+
+```bash
+# Clone the repo
+git clone https://github.com/rajvikmadhani/PokemonBattle-frontend.git
+cd PokemonBattle-frontend
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+```
+---
+
+## 💡 Contributing
+
+Contributions are welcome!  
+If you'd like to improve something, feel free to fork the repo, make changes, and open a pull request.
+
+---
+
+## 📬 Contact
+
+If you have any questions or suggestions, feel free to reach out via GitHub issues or at [@rajvikmadhani](https://github.com/rajvikmadhani).
