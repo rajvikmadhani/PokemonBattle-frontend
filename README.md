@@ -4,13 +4,14 @@ A dynamic and interactive Pokémon battle frontend built with **React** and **Vi
 
 🌐 **Live Demo:** [https://pokemon-battle-frontend-two.vercel.app/](https://pokemon-battle-frontend-two.vercel.app/)
 
-📤 **Deployment:** This project is deployed using [GitHub Pages](https://pages.github.com/) via [`gh-pages`](https://www.npmjs.com/package/gh-pages).  
+📤 **Deployment:** This project is deployed using [Vercel](https://vercel.com/rajvi-madhanis-projects/pokemon-battle-frontend/deployments).
 To deploy:
 
 ```bash
-npm run build     # Builds the app to the dist/ folder
-npm run deploy    # Publishes dist/ to the gh-pages branch
+npm run build
+npm run deploy  # or follow your Vercel deployment steps
 ```
+
 ---
 
 ## ✨ Features
@@ -44,6 +45,7 @@ npm install
 # Start development server
 npm run dev
 ```
+
 ---
 
 ## 💡 Contributing
