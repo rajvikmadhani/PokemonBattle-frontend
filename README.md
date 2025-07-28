@@ -36,7 +36,8 @@ npm run deploy  # or follow your Vercel deployment steps
 
 ```bash
 # Clone the repo
-git clone
+git clone https://github.com/rajvikmadhani/PokemonBattle-frontend.git
+cd PokemonBattle-frontend
 
 # Install dependencies
 npm install
