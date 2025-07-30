@@ -1,31 +1,38 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+
 import Home from './pages/Home';
 import Battle from './pages/Battle';
-import Rooster from './pages/Rooster';
+import Roster from './pages/Roster';
 import Details from './pages/Details';
 import Leaderboard from './pages/Leaderboard';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
+
 import MainLayout from './layouts/MainLayout';
 import Loader from './components/Loader';
-import { PokemonProvider } from './context/pokemonContext';
-import { UserProvider } from './context/userContext';
 import ProtectedRoute from './components/ProtectedRoute';
+
+import { PokemonProvider } from './context/PokemonContext';
+import { UserProvider } from './context/userContext';
+
 import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; // Toast styles
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
-  const [isMusicOn, setIsMusicOn] = useState(
-    () => JSON.parse(localStorage.getItem('isMusicOn')) ?? true
-  );
+  const [isMusicOn, setIsMusicOn] = useState(() => {
+    return JSON.parse(localStorage.getItem('isMusicOn')) ?? true;
+  });
   const [searchTerm, setSearchTerm] = useState('');
 
+  // Fake loading screen for 4s
   useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 4000);
     return () => clearTimeout(timer);
   }, []);
 
+  // Persist music toggle in localStorage
   useEffect(() => {
     localStorage.setItem('isMusicOn', JSON.stringify(isMusicOn));
   }, [isMusicOn]);
@@ -41,7 +48,6 @@ function App() {
             <Loader />
           ) : (
             <Routes>
-              {/* Wrap MainLayout properly */}
               <Route
                 path="/"
                 element={
@@ -58,12 +64,12 @@ function App() {
                 <Route path="signup" element={<SignUp />} />
                 <Route path="details/:id" element={<Details />} />
 
-                {/* Protected Routes */}
+                {/* 🔐 Protected Routes */}
                 <Route
                   path="roster"
                   element={
                     <ProtectedRoute>
-                      <Rooster />
+                      <Roster />
                     </ProtectedRoute>
                   }
                 />
@@ -87,8 +93,8 @@ function App() {
             </Routes>
           )}
         </Router>
+        <ToastContainer position="bottom-right" autoClose={3000} hideProgressBar />
       </PokemonProvider>
-      <ToastContainer />
     </UserProvider>
   );
 }

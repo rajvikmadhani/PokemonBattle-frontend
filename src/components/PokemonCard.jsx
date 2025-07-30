@@ -1,4 +1,4 @@
-import { usePokemon } from "../context/pokemonContext";
+import { usePokemon } from "../context/PokemonContext";
 import { useUser } from "../context/userContext";
 import { useNavigate } from "react-router-dom";
 

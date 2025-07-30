@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getAllPokemon } from '../utils/pokemonAPI';
-
-import card from '../components/card';
+import Card from '../components/Card'; // adjust path as needed
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Home = ({ isMusicOn, searchTerm }) => {

@@ -1,52 +1,57 @@
 import { createContext, useContext, useState, useEffect } from 'react';
-import { signinUser, signupUser } from '../utils/databaseAPI.js';
+import { signinUser, signupUser } from '../utils/databaseAPI';
+import { getAuth } from '../utils/authHelper';
 
 const UserContext = createContext();
 
 export const useUser = () => useContext(UserContext);
 
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState(localStorage.getItem('user') || null);
+  const [user, setUser] = useState(null);
 
+  // Login handler
   const login = async credentials => {
     try {
-      // credentials: { email, password }
-      const response = await signinUser(credentials);
-      console.log('response', response);
-
-      // Assuming response has { token, user }
-      setUser(response.user);
-      localStorage.setItem('token', response.token);
-      localStorage.setItem('user', JSON.stringify(response.user));
+      const { token, user } = await signinUser(credentials);
+      setUser(user);
+      localStorage.setItem('token', token);
+      localStorage.setItem('user', JSON.stringify(user));
     } catch (error) {
-      console.error('Failed to sign in:', error);
-      // Optionally handle or display an error message
+      console.error('Login failed:', error.message);
     }
   };
 
+  // Signup handler
   const signup = async newUserData => {
     try {
-      const data = await signupUser(newUserData);
-      console.log(data);
-      return data;
+      const { user } = await signupUser(newUserData);
+      return user;
     } catch (error) {
-      console.error('Signup error:', error);
+      console.error('Signup failed:', error.message);
       throw error;
     }
   };
 
-  // Logout function
+  // Logout handler
   const logout = () => {
     setUser(null);
-    localStorage.removeItem('user');
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
   };
 
-  // Check if a user is saved
+  // Load user on app startup
   useEffect(() => {
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
+    const token = localStorage.getItem('token');
+    if (token) {
+      getAuth(token)
+        .then(user => {
+          setUser(user);
+          localStorage.setItem('user', JSON.stringify(user));
+        })
+        .catch(err => {
+          console.error('Token invalid or expired:', err.message);
+          logout();
+        });
     }
   }, []);
 
