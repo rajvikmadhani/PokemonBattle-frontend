@@ -13,7 +13,8 @@ import MainLayout from './layouts/MainLayout';
 import Loader from './components/Loader';
 import ProtectedRoute from './components/ProtectedRoute';
 
-import { PokemonProvider } from './context/PokemonContext.jsx'; // ✅ Exact match!
+import { PokemonProvider } from './context/PokemonContext';
+
 import { UserProvider } from './context/UserContext.jsx'; // ✅ Exact match!
 
 import { ToastContainer } from 'react-toastify';

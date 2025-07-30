@@ -7,14 +7,14 @@ import {
   removePokemonFromUserRoster,
   resetUserRoster,
 } from '../utils/databaseAPI.js';
-import { useUser } from './UserContext.jsx'; // ✅ Import from UserContext
+import { useUser } from './UserContext.jsx'; // ✅ Import matches: context/UserContext.jsx
 
 const PokemonContext = createContext();
 
 export const usePokemon = () => useContext(PokemonContext);
 
 export const PokemonProvider = ({ children }) => {
-  const { user } = useUser(); // ✅ Get user from context
+  const { user } = useUser();
   const [roster, setRoster] = useState([]);
   const [score, setScore] = useState(0);
   const [loading, setLoading] = useState(true);
