@@ -1,10 +1,20 @@
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
-import { FaTimes, FaVolumeUp, FaVolumeMute } from 'react-icons/fa';
+import {
+  FaTimes,
+  FaVolumeUp,
+  FaVolumeMute,
+  FaHome,
+  FaUsers,
+  FaBattleNet,
+  FaTrophy,
+  FaSignInAlt,
+  FaSignOutAlt,
+} from 'react-icons/fa';
+import { FaRegUser } from 'react-icons/fa6'; // Not used in this example — you can add if needed
 import { useUser } from '../context/UserContext';
-import { FaHome, FaUsers, FaBattleNet, FaTrophy, FaSignInAlt, FaSignOutAlt } from 'react-icons/fa';
-import { FaRegUser } from 'react-icons/fa6';
+import menuGif from '../assets/menu.gif';
 
 const Navbar = ({ isMusicOn, toggleMusic, handleSearch, searchTerm }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,7 +41,7 @@ const Navbar = ({ isMusicOn, toggleMusic, handleSearch, searchTerm }) => {
         transition={{ duration: 0.8, ease: 'easeInOut' }}
       />
 
-      {/* 🔥 Show Search Bar ONLY on Home Page */}
+      {/* 🔍 Search Bar ONLY on Home Page */}
       {location.pathname === '/' && (
         <div className="relative flex items-center justify-center w-full mt-4">
           <input
@@ -58,7 +68,7 @@ const Navbar = ({ isMusicOn, toggleMusic, handleSearch, searchTerm }) => {
       {/* Menu Button */}
       <div className="relative flex items-center justify-end w-full">
         <button onClick={() => setIsOpen(!isOpen)} className="hover:scale-110 transition">
-          <img src="/src/assets/menu.gif" alt="Menu" className="w-20 h-20" />
+          <img src={menuGif} alt="Menu" className="w-20 h-20" />
         </button>
 
         {/* Game Menu Popup */}
@@ -70,71 +80,93 @@ const Navbar = ({ isMusicOn, toggleMusic, handleSearch, searchTerm }) => {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.3, ease: 'easeInOut' }}
             >
-              <>
-                <ul className="w-full flex flex-col gap-4">
-                  <li>
-                    <Link
-                      to="/"
-                      className="w-full text-lg font-bold text-white bg-orange-600 py-3 rounded-md shadow-md border-4 border-orange-300 uppercase flex items-center justify-center gap-2 hover:bg-orange-700 transition"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      Home
-                    </Link>
-                  </li>
-                  {user && (
-                    <>
-                      {['Roster', 'Battle', 'Leaderboard'].map((page, index) => (
-                        <li key={index}>
-                          <Link
-                            to={`/${page.toLowerCase()}`}
-                            className="w-full text-lg font-bold text-white bg-orange-600 py-3 rounded-md shadow-md border-4 border-orange-300 uppercase flex items-center justify-center gap-2 hover:bg-orange-700 transition"
-                            onClick={() => setIsOpen(false)}
-                          >
-                            {page}
-                          </Link>
-                        </li>
-                      ))}
-                    </>
-                  )}
-                </ul>
-                <button
-                  onClick={toggleMusic}
-                  className={`mt-4 w-full text-lg font-bold py-1 rounded-lg shadow-md uppercase flex items-center justify-center gap-2 transition ${
-                    isMusicOn
-                      ? 'bg-blue-600 border-blue-300 text-white hover:bg-blue-700' // ON state (Blue)
-                      : 'bg-green-600 border-red-300 text-white hover:bg-green-700' // OFF state (Red)
-                  }`}
-                >
-                  {isMusicOn ? <FaVolumeUp size={20} /> : <FaVolumeMute size={20} />}
-                  {isMusicOn ? 'Music On' : 'Music Off'}
-                </button>
+              <ul className="w-full flex flex-col gap-4">
+                <li>
+                  <Link
+                    to="/"
+                    className="w-full text-lg font-bold text-white bg-orange-600 py-3 rounded-md shadow-md border-4 border-orange-300 uppercase flex items-center justify-center gap-2 hover:bg-orange-700 transition"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <FaHome size={20} />
+                    Home
+                  </Link>
+                </li>
 
-                <div className="mt-4">
-                  {user ? (
-                    <button
-                      onClick={handleLogout}
-                      className="text-white text-lg font-bold uppercase py-3 rounded-md shadow-md bg-red-600 border-4 border-red-300 hover:bg-red-700 transition w-full"
-                    >
-                      Logout
-                    </button>
-                  ) : (
-                    <Link
-                      to="/signin"
-                      className="text-white text-lg font-bold uppercase py-3 rounded-md shadow-md bg-blue-600 border-4 border-blue-300 hover:bg-blue-700 transition w-full flex items-center justify-center"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      Sign In
-                    </Link>
-                  )}
-                </div>
+                {user && (
+                  <>
+                    <li>
+                      <Link
+                        to="/roster"
+                        className="w-full text-lg font-bold text-white bg-orange-600 py-3 rounded-md shadow-md border-4 border-orange-300 uppercase flex items-center justify-center gap-2 hover:bg-orange-700 transition"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        <FaUsers size={20} />
+                        Roster
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        to="/battle"
+                        className="w-full text-lg font-bold text-white bg-orange-600 py-3 rounded-md shadow-md border-4 border-orange-300 uppercase flex items-center justify-center gap-2 hover:bg-orange-700 transition"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        <FaBattleNet size={20} />
+                        Battle
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        to="/leaderboard"
+                        className="w-full text-lg font-bold text-white bg-orange-600 py-3 rounded-md shadow-md border-4 border-orange-300 uppercase flex items-center justify-center gap-2 hover:bg-orange-700 transition"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        <FaTrophy size={20} />
+                        Leaderboard
+                      </Link>
+                    </li>
+                  </>
+                )}
+              </ul>
 
-                <button
-                  onClick={() => setIsOpen(false)}
-                  className="mt-6 bg-red-600 w-10 h-10 flex items-center justify-center rounded-full border-4 border-red-200 shadow-md hover:bg-red-700 transition"
-                >
-                  <FaTimes size={20} />
-                </button>
-              </>
+              <button
+                onClick={toggleMusic}
+                className={`mt-4 w-full text-lg font-bold py-1 rounded-lg shadow-md uppercase flex items-center justify-center gap-2 transition ${
+                  isMusicOn
+                    ? 'bg-blue-600 border-blue-300 text-white hover:bg-blue-700'
+                    : 'bg-green-600 border-red-300 text-white hover:bg-green-700'
+                }`}
+              >
+                {isMusicOn ? <FaVolumeUp size={20} /> : <FaVolumeMute size={20} />}
+                {isMusicOn ? 'Music On' : 'Music Off'}
+              </button>
+
+              <div className="mt-4 w-full">
+                {user ? (
+                  <button
+                    onClick={handleLogout}
+                    className="w-full text-white text-lg font-bold uppercase py-3 rounded-md shadow-md bg-red-600 border-4 border-red-300 hover:bg-red-700 transition flex items-center justify-center gap-2"
+                  >
+                    <FaSignOutAlt size={20} />
+                    Logout
+                  </button>
+                ) : (
+                  <Link
+                    to="/signin"
+                    className="w-full text-white text-lg font-bold uppercase py-3 rounded-md shadow-md bg-blue-600 border-4 border-blue-300 hover:bg-blue-700 transition flex items-center justify-center gap-2"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <FaSignInAlt size={20} />
+                    Sign In
+                  </Link>
+                )}
+              </div>
+
+              <button
+                onClick={() => setIsOpen(false)}
+                className="mt-6 bg-red-600 w-10 h-10 flex items-center justify-center rounded-full border-4 border-red-200 shadow-md hover:bg-red-700 transition"
+              >
+                <FaTimes size={20} />
+              </button>
             </motion.div>
           )}
         </AnimatePresence>
