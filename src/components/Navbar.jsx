@@ -12,7 +12,7 @@ import {
   FaSignInAlt,
   FaSignOutAlt,
 } from 'react-icons/fa';
-import { FaRegUser } from 'react-icons/fa6'; // Not used in this example — you can add if needed
+import { FaRegUser } from 'react-icons/fa6';
 import { useUser } from '../context/UserContext';
 import menuGif from '../assets/menu.gif';
 
