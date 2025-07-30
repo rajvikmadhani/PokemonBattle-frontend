@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
 import { FaTimes, FaVolumeUp, FaVolumeMute } from 'react-icons/fa';
-import { useUser } from '../context/userContext';
+import { useUser } from '../context/UserContext';
 import { FaHome, FaUsers, FaBattleNet, FaTrophy, FaSignInAlt, FaSignOutAlt } from 'react-icons/fa';
 import { FaRegUser } from 'react-icons/fa6';
 

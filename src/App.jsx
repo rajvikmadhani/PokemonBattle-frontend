@@ -14,7 +14,7 @@ import Loader from './components/Loader';
 import ProtectedRoute from './components/ProtectedRoute';
 
 import { PokemonProvider } from './context/PokemonContext';
-import { UserProvider } from './context/userContext';
+import { UserProvider } from './context/UserContext';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; // Toast styles

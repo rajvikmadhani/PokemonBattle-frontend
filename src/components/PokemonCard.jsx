@@ -1,16 +1,15 @@
-import { usePokemon } from "../context/PokemonContext";
-import { useUser } from "../context/userContext";
-import { useNavigate } from "react-router-dom";
+import { usePokemon } from '../context/PokemonContext';
+import { useUser } from '../context/UserContext';
+import { useNavigate } from 'react-router-dom';
 
 const PokemonCard = ({ pokemon, isInRoster = false, onRemove }) => {
-  const { addPokemonToRoster, removePokemonFromRoster, limitReached } =
-    usePokemon();
+  const { addPokemonToRoster, removePokemonFromRoster, limitReached } = usePokemon();
   const { user } = useUser();
   const navigate = useNavigate();
 
   const handleAddPokemon = () => {
     if (!user) {
-      navigate("/signin");
+      navigate('/signin');
       return;
     }
     addPokemonToRoster(pokemon);
@@ -58,13 +57,11 @@ const PokemonCard = ({ pokemon, isInRoster = false, onRemove }) => {
         {/* Pokémon Name and Types */}
         <div className="flex justify-between items-center bg-green-500 rounded-lg border border-gray-900 mt-3 px-5">
           {/* Pokémon Name */}
-          <p className="text-md font-semibold capitalize text-gray-800">
-            {pokemon.name}
-          </p>
+          <p className="text-md font-semibold capitalize text-gray-800">{pokemon.name}</p>
 
           {/* Types */}
           <div className="flex gap-2">
-            {pokemon.types.map((typeInfo) => (
+            {pokemon.types.map(typeInfo => (
               <p
                 key={typeInfo.type.name}
                 className="text-gray-800 text-md font-semibold capitalize"
@@ -80,11 +77,8 @@ const PokemonCard = ({ pokemon, isInRoster = false, onRemove }) => {
           <div className="w-12 h-12 mt-3 rounded-full bg-gray-800 border border-black"></div>
           <div className="flex justify-center bg-green-500 rounded-lg border border-gray-900 mt-2 py-1 ml-2 px-4">
             <ul>
-              {pokemon.stats.map((stat) => (
-                <li
-                  key={stat.stat.name}
-                  className="flex justify-between text-sm text-gray-800"
-                >
+              {pokemon.stats.map(stat => (
+                <li key={stat.stat.name} className="flex justify-between text-sm text-gray-800">
                   <span>{stat.stat.name}</span>
                   <div className="w-5"></div>
                   <span>{stat.base_stat}</span>
@@ -111,11 +105,11 @@ const PokemonCard = ({ pokemon, isInRoster = false, onRemove }) => {
             disabled={limitReached}
             className={`w-32 py-2 rounded-lg transition-all ${
               limitReached
-                ? "bg-gray-400 text-white cursor-not-allowed"
-                : "bg-blue-500 hover:bg-blue-600 text-white"
+                ? 'bg-gray-400 text-white cursor-not-allowed'
+                : 'bg-blue-500 hover:bg-blue-600 text-white'
             }`}
           >
-            {limitReached ? "Roster Full" : "Add to Roster"}
+            {limitReached ? 'Roster Full' : 'Add to Roster'}
           </button>
         )}
       </div>

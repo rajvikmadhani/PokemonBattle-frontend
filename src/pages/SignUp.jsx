@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useUser } from '../context/userContext';
+import { useUser } from '../context/UserContext';
 import { toast } from 'react-toastify';
 import { Link } from 'react-router';
 
